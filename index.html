@@ -154,6 +154,82 @@ body{font-family:'Noto Serif JP',serif;background:var(--bg);color:var(--cream);o
 .scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px;font-family:'Cormorant Garamond',serif;font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--cream3)}
 .scroll-line{width:.5px;height:38px;background:linear-gradient(to bottom,var(--gold),transparent);animation:sp 2.5s ease-in-out infinite}
 @keyframes sp{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .nav { padding: 0 1.2rem; height: 48px; }
+  .nav-links { display: none; }
+  .nav-logo { font-size: 11px; }
+
+  .hero { grid-template-columns: 1fr; min-height: 100svh; }
+  .hero-canvas-side { display: none; }
+  .hero-text-side { padding: 5rem 1.8rem 3rem; border-left: none; }
+  .hero-sup { font-size: 18px !important; letter-spacing: .2em !important; }
+  .hero-jp { font-size: 36px; }
+  .hero-catch { font-size: 20px; }
+  .hero-sub { font-size: 12px; }
+  .hero-tags { gap: .5rem; }
+  .scroll-hint { display: none; }
+
+  .sec { padding: 3.5rem 1.5rem; }
+  .h1 { font-size: 26px; }
+  .h2 { font-size: 20px; }
+
+  /* Profile grid → single column */
+  .profile-grid, .career-cols,
+  [style*="grid-template-columns:250px"],
+  [style*="grid-template-columns:1fr 1fr"],
+  [style*="grid-template-columns:repeat(2"] {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  /* Research/book/step grids → single column */
+  .r-grid, .book-grid, .step-grid,
+  [style*="grid-template-columns:repeat(3"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Social grid → single column */
+  .s-grid { grid-template-columns: 1fr !important; }
+
+  /* Tables → readable on mobile */
+  .tbl thead { display: none; }
+  .tbl tbody tr { display: block; padding: .8rem 0; border-bottom: .5px solid var(--bd); }
+  .tbl tbody td { display: block; padding: .2rem 0; border: none; }
+  .tc-year { color: var(--gold); font-size: 12px; }
+  .tc-org { text-align: left !important; color: var(--cream3); font-size: 12px; }
+
+  /* Meta table */
+  .mt td { display: block; }
+  .mt .mk { width: auto; padding-right: 0; padding-bottom: .1rem; }
+
+  /* Photo */
+  [style*="position:absolute;top:-6rem"] { display: none; }
+
+  /* Name + LinkTree */
+  [style*="display:flex;align-items:baseline"] { flex-wrap: wrap; gap: .8rem; }
+
+  /* Lede box */
+  .lede { font-size: 13.5px; }
+
+  /* Contact form */
+  .form-wrap { padding: 0; }
+
+  /* Footer */
+  .footer { flex-direction: column; gap: .8rem; text-align: center; padding: 1.5rem; }
+  .footer-r { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+
+  /* Nav mobile: hamburger */
+  .nav-mobile-menu { display: flex; flex-direction: column; gap: 4px; cursor: pointer; }
+  .nav-mobile-menu span { width: 22px; height: 1.5px; background: var(--cream2); display: block; transition: .3s; }
+}
+
+@media (max-width: 480px) {
+  .hero-sup { font-size: 15px !important; }
+  .hero-catch { font-size: 18px; }
+  .sec { padding: 3rem 1.2rem; }
+}
 </style>
 </head>
 <body>
@@ -168,7 +244,21 @@ body{font-family:'Noto Serif JP',serif;background:var(--bg);color:var(--cream);o
     <li><a id="n-community" onclick="go('community')">コミュニティ</a></li>
     <li><a id="n-contact" onclick="go('contact')">お問い合わせ</a></li>
   </ul>
+  <div class="nav-mobile-menu" id="hamburger" onclick="toggleMobileNav()" style="display:none">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
+<!-- Mobile nav overlay -->
+<div id="mobile-nav" style="display:none;position:fixed;inset:0;background:rgba(12,4,4,0.97);z-index:299;padding-top:80px;text-align:center">
+  <ul style="list-style:none;display:flex;flex-direction:column;gap:2rem">
+    <li><a style="font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:.25em;text-transform:uppercase;color:var(--cream2);text-decoration:none" onclick="go('profile');closeMobileNav()">Profile</a></li>
+    <li><a style="font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:.25em;text-transform:uppercase;color:var(--cream2);text-decoration:none" onclick="go('lab');closeMobileNav()">Open Intelligence Lab</a></li>
+    <li><a style="font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:.25em;text-transform:uppercase;color:var(--cream2);text-decoration:none" onclick="go('research');closeMobileNav()">研 究</a></li>
+    <li><a style="font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:.25em;text-transform:uppercase;color:var(--cream2);text-decoration:none" onclick="go('edu');closeMobileNav()">教 育</a></li>
+    <li><a style="font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:.25em;text-transform:uppercase;color:var(--cream2);text-decoration:none" onclick="go('community');closeMobileNav()">コミュニティ</a></li>
+    <li><a style="font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:.25em;text-transform:uppercase;color:var(--cream2);text-decoration:none" onclick="go('contact');closeMobileNav()">お問い合わせ</a></li>
+  </ul>
+</div>
 
 <!-- ===== PROFILE ===== -->
 <div id="p-profile" class="page on">
@@ -710,6 +800,23 @@ function go(id){
   }
   resize();draw();window.addEventListener('resize',resize);
 })();
+
+// Mobile nav
+function toggleMobileNav(){
+  const m=document.getElementById('mobile-nav');
+  m.style.display=m.style.display==='none'?'flex':'none';
+  if(m.style.display==='flex')m.style.flexDirection='column';
+}
+function closeMobileNav(){
+  document.getElementById('mobile-nav').style.display='none';
+}
+// Show hamburger on mobile
+function checkMobile(){
+  const h=document.getElementById('hamburger');
+  if(h) h.style.display=window.innerWidth<=768?'flex':'none';
+}
+checkMobile();
+window.addEventListener('resize',checkMobile);
 </script>
 </body>
 </html>
