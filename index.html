@@ -204,8 +204,13 @@ body{font-family:'Noto Serif JP',serif;background:var(--bg);color:var(--cream);o
   .mt td { display: block; }
   .mt .mk { width: auto; padding-right: 0; padding-bottom: .1rem; }
 
-  /* Photo */
-  [style*="position:absolute;top:-6rem"] { display: none; }
+  /* Photo - hide all absolute bg photo layers on mobile */
+  [style*="position:absolute;top:-6rem"],
+  [style*="position:absolute;top:-4rem"],
+  [style*="position:absolute;top:0;left:-"] { display: none !important; }
+
+  /* Profile section: remove relative positioning that reserved space for photo */
+  [style*="position:relative;display:grid"] { position: static !important; }
 
   /* Name + LinkTree */
   [style*="display:flex;align-items:baseline"] { flex-wrap: wrap; gap: .8rem; }
