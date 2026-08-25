@@ -28,6 +28,8 @@ body{font-family:'Noto Serif JP',serif;background:var(--bg);color:var(--cream);o
 .nav-links a{font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.17em;text-transform:uppercase;color:var(--cream3);text-decoration:none;padding:0 .9rem;height:54px;display:flex;align-items:center;border-bottom:1.5px solid transparent;transition:color .3s,border-color .3s}
 .nav-links a:hover{color:var(--cream2)}
 .nav-links a.on{color:var(--gold);border-bottom-color:var(--gold)}
+.nav-links a.portal-back{height:32px;margin:11px 0 11px .65rem;padding:0 .9rem;border:.5px solid var(--gold-d);color:var(--gold);letter-spacing:.12em;white-space:nowrap;transition:color .3s,background .3s,border-color .3s}
+.nav-links a.portal-back:hover{color:var(--bg);background:var(--gold);border-color:var(--gold)}
 
 /* PAGES */
 .page{display:none;padding-top:54px}
@@ -132,6 +134,9 @@ body{font-family:'Noto Serif JP',serif;background:var(--bg);color:var(--cream);o
 .fnote{font-size:12px;color:var(--cream3);text-align:center;margin-top:1.3rem;line-height:1.85}
 
 /* FOOTER */
+.to-top-wrap{background:var(--bg);padding:2.2rem 3rem;text-align:center;border-top:.5px solid var(--bd2)}
+.to-top-btn{display:inline-flex;align-items:center;justify-content:center;gap:.7rem;background:transparent;border:.5px solid var(--gold-d);color:var(--gold);font-family:'Noto Serif JP',serif;font-size:12px;letter-spacing:.18em;padding:.7rem 1.25rem;cursor:pointer;transition:color .3s,background .3s,border-color .3s,transform .3s}
+.to-top-btn:hover{color:var(--bg);background:var(--gold);border-color:var(--gold);transform:translateY(-2px)}
 .footer{background:#050101;padding:1.8rem 3rem;display:flex;align-items:center;justify-content:space-between;border-top:.5px solid var(--bd)}
 .footer-l{font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.3em;color:var(--cream3);text-transform:uppercase}
 .footer-r{display:flex;gap:1.8rem;align-items:center}
@@ -254,6 +259,7 @@ body{font-family:'Noto Serif JP',serif;background:var(--bg);color:var(--cream);o
     <li><a id="n-edu" onclick="go('edu')">教 育</a></li>
     <li><a id="n-community" onclick="go('community')">コミュニティ</a></li>
     <li><a id="n-contact" onclick="go('contact')">お問い合わせ</a></li>
+    <li><a class="portal-back" href="https://masakikurihara.com/">← ポータルに戻る</a></li>
   </ul>
   <div class="nav-mobile-menu" id="hamburger" onclick="toggleMobileNav()" style="display:none">
     <span></span><span></span><span></span>
@@ -262,6 +268,7 @@ body{font-family:'Noto Serif JP',serif;background:var(--bg);color:var(--cream);o
 <!-- Mobile nav overlay -->
 <div id="mobile-nav" style="display:none;position:fixed;inset:0;background:rgba(12,4,4,0.97);z-index:299;padding-top:80px;text-align:center">
   <ul style="list-style:none;display:flex;flex-direction:column;gap:2rem">
+    <li><a href="https://masakikurihara.com/" style="font-family:'Noto Serif JP',serif;font-size:15px;letter-spacing:.12em;color:var(--gold);text-decoration:none;border:.5px solid var(--gold-d);padding:.7rem 1.1rem">← ポータルに戻る</a></li>
     <li><a style="font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:.25em;text-transform:uppercase;color:var(--cream2);text-decoration:none" onclick="go('profile');closeMobileNav()">Profile</a></li>
     <li><a style="font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:.25em;text-transform:uppercase;color:var(--cream2);text-decoration:none" onclick="go('lab');closeMobileNav()">Open Intelligence Lab</a></li>
     <li><a style="font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:.25em;text-transform:uppercase;color:var(--cream2);text-decoration:none" onclick="go('research');closeMobileNav()">研 究</a></li>
@@ -764,9 +771,13 @@ body{font-family:'Noto Serif JP',serif;background:var(--bg);color:var(--cream);o
 </div>
 
 <!-- FOOTER -->
+<div class="to-top-wrap">
+  <button class="to-top-btn" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="ページの先頭へ戻る">↑ トップへ</button>
+</div>
 <div class="footer">
   <span class="footer-l">Masaki Kurihara — Open Intelligence Lab</span>
   <div class="footer-r">
+    <a class="footer-link" href="https://masakikurihara.com/">← ポータルに戻る</a>
     <span class="footer-link" onclick="go('profile')">Profile</span>
     <span class="footer-link" onclick="go('research')">研 究</span>
     <span class="footer-link" onclick="go('community')">コミュニティ</span>
