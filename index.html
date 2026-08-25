@@ -49,6 +49,10 @@ body{font-family:'Noto Serif JP',serif;background:var(--bg);color:var(--cream);o
 .prose{font-size:14.5px;color:var(--cream2);font-weight:300;line-height:2.05}
 .prose em{color:var(--gold);font-style:italic}
 .prose strong{color:var(--cream);font-weight:400}
+.term-tip{position:relative;display:inline-block;color:var(--gold);font-style:italic;cursor:help;border-bottom:1px dotted var(--gold-d);outline:none}
+.term-tip-box{position:absolute;left:50%;bottom:calc(100% + 12px);z-index:120;width:min(440px,calc(100vw - 40px));padding:1rem 1.1rem;background:rgba(18,6,6,.98);border:.5px solid var(--gold-d);box-shadow:0 14px 38px rgba(0,0,0,.48);color:var(--cream2);font-family:'Noto Serif JP',serif;font-size:12.5px;font-style:normal;font-weight:300;letter-spacing:.02em;line-height:1.9;text-align:left;opacity:0;visibility:hidden;pointer-events:none;transform:translate(-50%,6px);transition:opacity .22s,transform .22s,visibility .22s}
+.term-tip-box::after{content:"";position:absolute;top:100%;left:50%;width:8px;height:8px;background:rgba(18,6,6,.98);border-right:.5px solid var(--gold-d);border-bottom:.5px solid var(--gold-d);transform:translate(-50%,-4px) rotate(45deg)}
+.term-tip:hover .term-tip-box,.term-tip:focus .term-tip-box,.term-tip:focus-visible .term-tip-box{opacity:1;visibility:visible;transform:translate(-50%,0)}
 
 /* META TABLE */
 .mt{width:100%;border-collapse:collapse}
@@ -139,9 +143,6 @@ body{font-family:'Noto Serif JP',serif;background:var(--bg);color:var(--cream);o
 .to-top-btn:hover{color:var(--bg);background:var(--gold);border-color:var(--gold);transform:translateY(-2px)}
 .footer{background:#050101;padding:1.8rem 3rem;display:flex;align-items:center;justify-content:space-between;border-top:.5px solid var(--bd)}
 .footer-l{font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.3em;color:var(--cream3);text-transform:uppercase}
-.footer-r{display:flex;gap:1.8rem;align-items:center}
-.footer-link{font-family:'Cormorant Garamond',serif;font-size:11px;color:var(--cream3);text-decoration:none;transition:color .3s;cursor:pointer}
-.footer-link:hover{color:var(--gold)}
 .footer-copy{font-family:'Cormorant Garamond',serif;font-size:11px;color:rgba(237,228,206,.2)}
 
 /* HERO */
@@ -156,6 +157,9 @@ body{font-family:'Noto Serif JP',serif;background:var(--bg);color:var(--cream);o
 .hero-sub{font-family:'Noto Serif JP',serif;font-weight:200;font-size:13px;color:var(--cream3);letter-spacing:.18em;line-height:2.2;border-left:1.5px solid var(--gold-d);padding-left:1rem;margin-bottom:2.8rem}
 .hero-tags{display:flex;gap:.65rem;flex-wrap:wrap}
 .htag{font-family:'Cormorant Garamond',serif;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--cream3);border:.5px solid var(--bd);padding:5px 12px}
+.htag-break{flex-basis:100%;height:0}
+.htag-link{text-decoration:none;cursor:pointer;transition:color .3s,border-color .3s,background .3s}
+.htag-link:hover,.htag-link:focus-visible{color:var(--gold);border-color:var(--gold-d);background:rgba(176,128,48,.08);outline:none}
 .scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px;font-family:'Cormorant Garamond',serif;font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--cream3)}
 .scroll-line{width:.5px;height:38px;background:linear-gradient(to bottom,var(--gold),transparent);animation:sp 2.5s ease-in-out infinite}
 @keyframes sp{0%,100%{opacity:.3}50%{opacity:1}}
@@ -234,7 +238,9 @@ body{font-family:'Noto Serif JP',serif;background:var(--bg);color:var(--cream);o
 
   /* Footer */
   .footer { flex-direction: column; gap: .8rem; text-align: center; padding: 1.5rem; }
-  .footer-r { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+  .term-tip-box{position:fixed;left:1rem;right:1rem;bottom:1rem;width:auto;transform:translateY(8px)}
+  .term-tip-box::after{display:none}
+  .term-tip:hover .term-tip-box,.term-tip:focus .term-tip-box,.term-tip:focus-visible .term-tip-box{transform:none}
 
   /* Nav mobile: hamburger */
   .nav-mobile-menu { display: flex; flex-direction: column; gap: 4px; cursor: pointer; }
@@ -259,7 +265,7 @@ body{font-family:'Noto Serif JP',serif;background:var(--bg);color:var(--cream);o
     <li><a id="n-edu" onclick="go('edu')">教 育</a></li>
     <li><a id="n-community" onclick="go('community')">コミュニティ</a></li>
     <li><a id="n-contact" onclick="go('contact')">お問い合わせ</a></li>
-    <li><a class="portal-back" href="https://masakikurihara.com/">← ポータルに戻る</a></li>
+    <li><a class="portal-back" href="https://masakikurihara.com/">← ポータルサイトへ</a></li>
   </ul>
   <div class="nav-mobile-menu" id="hamburger" onclick="toggleMobileNav()" style="display:none">
     <span></span><span></span><span></span>
@@ -268,7 +274,7 @@ body{font-family:'Noto Serif JP',serif;background:var(--bg);color:var(--cream);o
 <!-- Mobile nav overlay -->
 <div id="mobile-nav" style="display:none;position:fixed;inset:0;background:rgba(12,4,4,0.97);z-index:299;padding-top:80px;text-align:center">
   <ul style="list-style:none;display:flex;flex-direction:column;gap:2rem">
-    <li><a href="https://masakikurihara.com/" style="font-family:'Noto Serif JP',serif;font-size:15px;letter-spacing:.12em;color:var(--gold);text-decoration:none;border:.5px solid var(--gold-d);padding:.7rem 1.1rem">← ポータルに戻る</a></li>
+    <li><a href="https://masakikurihara.com/" style="font-family:'Noto Serif JP',serif;font-size:15px;letter-spacing:.12em;color:var(--gold);text-decoration:none;border:.5px solid var(--gold-d);padding:.7rem 1.1rem">← ポータルサイトへ</a></li>
     <li><a style="font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:.25em;text-transform:uppercase;color:var(--cream2);text-decoration:none" onclick="go('profile');closeMobileNav()">Profile</a></li>
     <li><a style="font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:.25em;text-transform:uppercase;color:var(--cream2);text-decoration:none" onclick="go('lab');closeMobileNav()">Open Intelligence Lab</a></li>
     <li><a style="font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:.25em;text-transform:uppercase;color:var(--cream2);text-decoration:none" onclick="go('research');closeMobileNav()">研 究</a></li>
@@ -291,10 +297,11 @@ body{font-family:'Noto Serif JP',serif;background:var(--bg);color:var(--cream);o
       <div class="hero-sub">世界の構造を可視化し<br>知の力で再構築する</div>
       <div class="hero-tags">
         <span class="htag">Professor</span>
-        <span class="htag">Tax Accountant</span>
-        <span class="htag">AI &amp; Society</span>
+        <a class="htag htag-link" href="https://mkctaoffice.com/" target="_blank" rel="noopener noreferrer" aria-label="栗原正樹税理士事務所サイトへ">Tax Accountant</a>
+        <span class="htag-break" aria-hidden="true"></span>
         <span class="htag">Carbon Neutral</span>
         <span class="htag">Curiosity</span>
+        <a class="htag htag-link" href="https://chitekium.com/" target="_blank" rel="noopener noreferrer" aria-label="Chitekiumサイトへ">AI &amp; Society</a>
       </div>
     </div>
     <div class="scroll-hint"><div class="scroll-line"></div><span>Scroll</span></div>
@@ -422,6 +429,8 @@ body{font-family:'Noto Serif JP',serif;background:var(--bg);color:var(--cream);o
           <tr><td class="tc-year">令和8年</td><td class="tc-title">経営者のためのアカウンティングマインド</td><td class="tc-org">さいたま中央青年会議所</td></tr>
           <tr><td class="tc-year">令和8年</td><td class="tc-title">なぜ事故は起こるのか？脳のメカニズムから考える</td><td class="tc-org">中島建工株式会社</td></tr>
           <tr><td class="tc-year">令和8年</td><td class="tc-title">大学FD講演「学生のレポート作成における生成AI使用について考える」</td><td class="tc-org">学内FD研修</td></tr>
+          <tr><td class="tc-year">令和8年</td><td class="tc-title">AI共生時代に大学で「経営」を学ぶ意味はあるのか</td><td class="tc-org">茨城キリスト教大学</td></tr>
+          <tr><td class="tc-year">令和8年</td><td class="tc-title">ＡＩ 共生時代に人間に求められる力</td><td class="tc-org">茨城県高大連携事業</td></tr>
           <tr><td class="tc-year">令和7年</td><td class="tc-title">「AIと社会」卓話 / AIセミナー</td><td class="tc-org">浦和ロータリークラブ</td></tr>
           <tr><td class="tc-year">令和7年</td><td class="tc-title">地域連携講座「AIと社会」</td><td class="tc-org">茨城キリスト教大学</td></tr>
           <tr><td class="tc-year">令和7年</td><td class="tc-title">「AI共生時代に求められる人財とは」</td><td class="tc-org">茨城県高大連携事業</td></tr>
@@ -456,7 +465,7 @@ body{font-family:'Noto Serif JP',serif;background:var(--bg);color:var(--cream);o
           <div class="prose" style="margin-bottom:1.8rem">つまり、Open Intelligence Labは、社会課題を超学際的に検討する必要があるという私の信念に基づいた<em>「開かれた」思考の実験場</em>を意味しています。</div>
           <div class="prose" style="margin-bottom:1.8rem">本ラボでは、社会課題そのものを所与の前提とせず、<em>「何を課題とすべきか」</em>を問い直すことから出発します。私たちは、歴史の中で多くの叡智を獲得してきました。しかし、その叡智を継承するだけでなく、私たちの進歩の歴史や思考の枠組みそのものが本当に正しかったのかを再検証する必要があります。生成AIの出現は、単なる産業構造の変化に留まらず、民主主義や資本主義といった近代社会の根源的価値観を再考させる契機となっています。</div>
           <div class="prose" style="margin-bottom:1.8rem">今日、大学で学ぶことの意義、特に文系学問の存在意義に懐疑的な見解が広がる背景には、学問と実務の断絶があると感じています。私は、研究者・教育者・実務家として、これまでの人類の叡智を批判的に継承し、それを社会に浸透させることで、人々の真の豊かさを取り戻す可能性を信じています。</div>
-          <div class="prose" style="margin-bottom:1.8rem">私は自らが<em>「実務家教員」</em>であり<em>「異端の研究者」</em>であると自覚しています。しかし、異端であるがゆえに、閉じた学問体系や制度的制約を超え、新しい知の形を社会へ還元できるのではないか――そうした想いのもと、学問の枠にとらわれない学際的な研究を続けています。</div>
+          <div class="prose" style="margin-bottom:1.8rem">私は自らが<em>「実務家教員」</em>であり<span class="term-tip" tabindex="0">「異端の研究者」<span class="term-tip-box" role="tooltip">通常、研究者は「深く狭く」、自分の専門領域を掘り下げていきます。それに対し、私は自分の「経営」という専門性を軸に、さまざまな分野を統合する研究スタイルです。さまざまな研究領域のハブとなる、あえて自己完結しない存在を目指しています。よって、「異端」と表現しています。</span></span>であると自覚しています。しかし、異端であるがゆえに、閉じた学問体系や制度的制約を超え、新しい知の形を社会へ還元できるのではないか――そうした想いのもと、学問の枠にとらわれない学際的な研究を続けています。</div>
           <div class="prose" style="margin-bottom:1.8rem">従来、経営学の分析対象である「経営」という現象は、人を最小単位としてきました。しかし、社会学・脳神経科学・行動遺伝学・複雑系科学といった分野横断的な知見を統合することで、単なる行動の観察を超え、欲求・価値観・環境・構造・脳・遺伝的特性といった多層的要因から現象を高解像度で分析し、理論モデル化することが可能になります。この試みは、極めて不確実な環境下における経営の成否に対し、説明力を飛躍的に高め得るものです。現時点ではまだ壮大な仮説の段階ですが、確かな実務的示唆を得つつあり、ここからさらなる知の探求が始まります。</div>
           <div class="prose">もし、さまざまな学問分野で人類の叡智が融合したとしたら――そのような未来を想像するとき、私は強い好奇心と希望を感じます。この「Open Intelligence Lab」という名称には、<em>知を開き、統合し、社会へ還流させ、世界をより良い未来へ導く</em>という私自身の信念が込められています。</div>
         </div>
@@ -776,14 +785,7 @@ body{font-family:'Noto Serif JP',serif;background:var(--bg);color:var(--cream);o
 </div>
 <div class="footer">
   <span class="footer-l">Masaki Kurihara — Open Intelligence Lab</span>
-  <div class="footer-r">
-    <a class="footer-link" href="https://masakikurihara.com/">← ポータルに戻る</a>
-    <span class="footer-link" onclick="go('profile')">Profile</span>
-    <span class="footer-link" onclick="go('research')">研 究</span>
-    <span class="footer-link" onclick="go('community')">コミュニティ</span>
-    <span class="footer-link" onclick="go('contact')">Contact</span>
-    <span class="footer-copy">© 2025 Masaki Kurihara</span>
-  </div>
+  <span class="footer-copy">© 2025 Masaki Kurihara</span>
 </div>
 
 <script>
